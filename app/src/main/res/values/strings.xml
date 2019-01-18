@@ -96,4 +96,6 @@
     <string name="grid">Grid</string>
     <string name="list">List</string>
     <string name="style">Style</string>
+    <string name="restore">Restore</string>
+    <string name="backup">Backup</string>
 </resources>
