@@ -33,7 +33,7 @@ public class DBManager {
         dbHelper.close();
     }
 
-    public void insert(String note, String title) {
+    public void insert(String note, String title, String tag) {
         Date c = Calendar.getInstance().getTime();
 
         SimpleDateFormat df = new SimpleDateFormat("dd-MMM-yyyy");
@@ -42,11 +42,12 @@ public class DBManager {
         contentValue.put(DatabaseHelper.NOTE, note);
         contentValue.put(DatabaseHelper.TITLE, title);
         contentValue.put(DatabaseHelper.DATE, formattedDate);
+        contentValue.put(DatabaseHelper.TAG, tag);
         database.insert(DatabaseHelper.TABLE_NAME, null, contentValue);
     }
 
     public Cursor fetch() {
-        String[] columns = new String[] { DatabaseHelper._ID, DatabaseHelper.NOTE, DatabaseHelper.TITLE, DatabaseHelper.DATE };
+        String[] columns = new String[] { DatabaseHelper._ID, DatabaseHelper.NOTE, DatabaseHelper.TITLE, DatabaseHelper.DATE, DatabaseHelper.TAG };
         Cursor cursor = database.query(DatabaseHelper.TABLE_NAME, columns, null, null, null, null, null);
         if (cursor != null) {
             cursor.moveToFirst();
@@ -56,7 +57,7 @@ public class DBManager {
 
     public Cursor fetchRow(int position) {
 
-        String columns[] = new String[] { DatabaseHelper._ID, DatabaseHelper.NOTE, DatabaseHelper.TITLE, DatabaseHelper.DATE };
+        String columns[] = new String[] { DatabaseHelper._ID, DatabaseHelper.NOTE, DatabaseHelper.TITLE, DatabaseHelper.DATE, DatabaseHelper.TAG };
         String id[] = new String[] {Integer.toString(position)};
         Cursor cursor = database.query(DatabaseHelper.TABLE_NAME, columns, "_id = ?"    , id, null, null, null);
         if (cursor != null) {
@@ -65,7 +66,7 @@ public class DBManager {
         return cursor;
     }
 
-    public int update(int _id, String note, String title) {
+    public int update(int _id, String note, String title, String tag) {
         Date c = Calendar.getInstance().getTime();
 
         SimpleDateFormat df = new SimpleDateFormat("dd-MMM-yyyy");
@@ -74,6 +75,7 @@ public class DBManager {
         contentValues.put(DatabaseHelper.NOTE, note);
         contentValues.put(DatabaseHelper.TITLE, title);
         contentValues.put(DatabaseHelper.DATE, formattedDate);
+        contentValues.put(DatabaseHelper.TAG, tag);
         return database.update(DatabaseHelper.TABLE_NAME, contentValues, DatabaseHelper._ID + " = " + _id, null);
 
     }

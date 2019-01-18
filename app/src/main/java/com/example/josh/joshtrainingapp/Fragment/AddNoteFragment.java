@@ -7,7 +7,9 @@ import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.AdapterView;
 import android.widget.EditText;
+import android.widget.Spinner;
 
 import com.example.josh.joshtrainingapp.Database.DBManager;
 import com.example.josh.joshtrainingapp.R;
@@ -27,6 +29,7 @@ public class AddNoteFragment extends Fragment {
     public void onResume() {
         super.onResume();
         FloatingActionButton fab = (FloatingActionButton)getView().findViewById(R.id.floatingActionButton2);
+        final Spinner spinner = getView().findViewById(R.id.spinnerAdd);
         fab.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -34,8 +37,7 @@ public class AddNoteFragment extends Fragment {
                 dbManager.open();
                 EditText editTextAdd = getView().findViewById(R.id.editTextAdd);
                 EditText editTextTitle = getView().findViewById(R.id.editTextTitle);
-                dbManager.insert(editTextAdd.getText().toString(), editTextTitle.getText().toString());
-
+                dbManager.insert(editTextAdd.getText().toString(), editTextTitle.getText().toString(), spinner.getSelectedItem().toString());
                 getFragmentManager().popBackStackImmediate();
             }
         });

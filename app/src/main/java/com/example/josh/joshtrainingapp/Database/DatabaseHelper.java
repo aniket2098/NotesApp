@@ -14,16 +14,16 @@ import android.database.sqlite.SQLiteOpenHelper;
         public static final String NOTE = "note";
         public static final String TITLE = "title";
         public static final String DATE = "date";
-
+        public static final String TAG = "tag";
         // Database Information
         public static final String DB_NAME = "DIARY.DB";
 
         // database version
-        public static final int DB_VERSION = 1;
+        public static final int DB_VERSION = 2;
 
         // Creating table query
         private static final String CREATE_TABLE = "create table " + TABLE_NAME + "(" + _ID
-                + " INTEGER PRIMARY KEY AUTOINCREMENT, " + NOTE + " TEXT, " + TITLE +" TEXT, " + DATE + " TEXT);";
+                + " INTEGER PRIMARY KEY AUTOINCREMENT, " + NOTE + " TEXT, " + TITLE +" TEXT, " + DATE + " TEXT, "+ TAG +" TEXT);";
 
         public DatabaseHelper(Context context) {
             super(context, DB_NAME, null, DB_VERSION);
@@ -36,7 +36,7 @@ import android.database.sqlite.SQLiteOpenHelper;
 
         @Override
         public void onUpgrade(SQLiteDatabase db, int oldVersion, int newVersion) {
-//            db.execSQL("DROP TABLE IF EXISTS " + TABLE_NAME);
+            db.execSQL("DROP TABLE IF EXISTS " + TABLE_NAME);
             onCreate(db);
         }
     }
