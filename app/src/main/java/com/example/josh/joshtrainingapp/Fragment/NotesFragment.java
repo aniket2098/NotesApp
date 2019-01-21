@@ -1,11 +1,8 @@
 package com.example.josh.joshtrainingapp.Fragment;
 
-import android.app.job.JobInfo;
-import android.app.job.JobScheduler;
 import android.content.Context;
 import android.content.SharedPreferences;
 import android.database.Cursor;
-import android.graphics.drawable.Drawable;
 import android.os.Bundle;
 import android.support.design.widget.FloatingActionButton;
 import android.support.v4.app.Fragment;
@@ -14,17 +11,13 @@ import android.support.v7.widget.DefaultItemAnimator;
 import android.support.v7.widget.GridLayoutManager;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.SearchView;
-import android.widget.TextView;
 
-import com.example.josh.joshtrainingapp.Activity.NavigationHome;
 import com.example.josh.joshtrainingapp.Adapter.NotesAdapter;
 import com.example.josh.joshtrainingapp.Database.DBManager;
-import com.example.josh.joshtrainingapp.DataObject.NoteDisplayObject;
+import com.example.josh.joshtrainingapp.POJO.NoteDisplayObject;
 import com.example.josh.joshtrainingapp.R;
 
 import java.util.ArrayList;

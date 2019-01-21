@@ -1,4 +1,4 @@
-package com.example.josh.joshtrainingapp.DataObject;
+package com.example.josh.joshtrainingapp.POJO;
 
 public class NoteDisplayObject {
 

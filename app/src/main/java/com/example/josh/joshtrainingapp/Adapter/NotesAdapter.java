@@ -3,7 +3,6 @@ package com.example.josh.joshtrainingapp.Adapter;
 import android.app.AlertDialog;
 import android.content.Context;
 import android.content.DialogInterface;
-import android.graphics.drawable.Drawable;
 import android.os.Build;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
@@ -20,7 +19,7 @@ import android.view.ViewGroup;
 import android.widget.TextView;
 
 import com.example.josh.joshtrainingapp.Database.DBManager;
-import com.example.josh.joshtrainingapp.DataObject.NoteDisplayObject;
+import com.example.josh.joshtrainingapp.POJO.NoteDisplayObject;
 import com.example.josh.joshtrainingapp.R;
 import com.example.josh.joshtrainingapp.Fragment.ViewNoteFragment;
 
