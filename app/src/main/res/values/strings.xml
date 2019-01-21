@@ -98,4 +98,6 @@
     <string name="style">Style</string>
     <string name="restore">Restore</string>
     <string name="backup">Backup</string>
+    <string name="sort">Sort</string>
+    <string name="notes">Notes</string>
 </resources>

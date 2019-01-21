@@ -4,7 +4,8 @@ import android.app.job.JobParameters;
 import android.app.job.JobService;
 import android.os.Environment;
 import android.util.Log;
-import android.widget.Toast;
+
+import com.example.josh.joshtrainingapp.BuildConfig;
 
 import java.io.File;
 import java.io.FileInputStream;
@@ -25,8 +26,8 @@ public class JobBackup extends JobService {
             File sd = Environment.getExternalStorageDirectory();
             File data = Environment.getDataDirectory();
 
-            if(sd.canWrite()) {
-                String currentDBPath = "//data//com.example.josh.joshtrainingapp//databases//DIARY.DB";
+            if (sd.canWrite()) {
+                String currentDBPath = "//data//" + BuildConfig.APPLICATION_ID + "//databases//DIARY.DB";
                 String backupDBPath = "BACKUPDIARY.DB";
                 File src = new File(data, currentDBPath);
                 File dst = new File(sd, backupDBPath);

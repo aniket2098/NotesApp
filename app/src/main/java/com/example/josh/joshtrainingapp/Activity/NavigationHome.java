@@ -7,13 +7,12 @@ import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.content.pm.PackageManager;
-import android.graphics.drawable.Drawable;
 import android.os.Bundle;
 import android.os.Environment;
+import android.support.design.widget.NavigationView;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentTransaction;
-import android.support.design.widget.NavigationView;
 import android.support.v4.content.ContextCompat;
 import android.support.v4.view.GravityCompat;
 import android.support.v4.widget.DrawerLayout;
@@ -23,9 +22,9 @@ import android.support.v7.widget.Toolbar;
 import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
-import android.widget.TextView;
 import android.widget.Toast;
 
+import com.example.josh.joshtrainingapp.Adapter.NotesAdapter;
 import com.example.josh.joshtrainingapp.Fragment.NotesFragment;
 import com.example.josh.joshtrainingapp.R;
 
@@ -34,13 +33,12 @@ import java.io.FileInputStream;
 import java.io.FileOutputStream;
 import java.io.InputStream;
 import java.io.OutputStream;
-import java.nio.channels.FileChannel;
 
 public class NavigationHome extends AppCompatActivity
         implements NavigationView.OnNavigationItemSelectedListener {
 
     Bundle bundle = new Bundle();
-
+    NotesFragment notesFragment;
     SharedPreferences sharedPreferences;
 
     @Override
@@ -61,7 +59,8 @@ public class NavigationHome extends AppCompatActivity
         setContentView(R.layout.activity_navigation_home);
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
-        changeFragment(new NotesFragment());
+        notesFragment = new NotesFragment();
+        changeFragment(notesFragment);
 
         DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
         ActionBarDrawerToggle toggle = new ActionBarDrawerToggle(
@@ -206,6 +205,11 @@ public class NavigationHome extends AppCompatActivity
                     })
                     .setIcon(android.R.drawable.ic_dialog_alert)
                     .show();
+        }
+        else if(id == R.id.action_sort) {
+
+            NotesAdapter notesAdapter = notesFragment.getNotesAdapter();
+            notesAdapter.sortByTitle();
         }
         return super.onOptionsItemSelected(item);
 

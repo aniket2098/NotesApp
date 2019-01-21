@@ -2,7 +2,6 @@ package com.example.josh.joshtrainingapp.Fragment;
 
 import android.content.Context;
 import android.content.SharedPreferences;
-import android.database.Cursor;
 import android.os.Bundle;
 import android.support.design.widget.FloatingActionButton;
 import android.support.v4.app.Fragment;
@@ -16,17 +15,14 @@ import android.view.View;
 import android.view.ViewGroup;
 
 import com.example.josh.joshtrainingapp.Adapter.NotesAdapter;
-import com.example.josh.joshtrainingapp.Database.DBManager;
 import com.example.josh.joshtrainingapp.POJO.NoteDisplayObject;
 import com.example.josh.joshtrainingapp.R;
-
-import java.util.ArrayList;
-import java.util.List;
 
 
 public class NotesFragment extends Fragment {
 
     String style;
+    NotesAdapter notesAdapter;
 
     public NotesFragment() {
     }
@@ -37,22 +33,8 @@ public class NotesFragment extends Fragment {
         Bundle bundle = getArguments();
         style = bundle.getString("Style");
 
-        List<NoteDisplayObject> notes = new ArrayList<>();
-        DBManager dbManager = new DBManager(getContext());
-        dbManager.open();
-        Cursor cursor = dbManager.fetch();
-        do {
-                    try {
-                        notes.add(new NoteDisplayObject(cursor.getString(cursor.getColumnIndex("title")),
-                                cursor.getString(cursor.getColumnIndex("date")),
-                                cursor.getInt(cursor.getColumnIndex("_id")),
-                                cursor.getString(cursor.getColumnIndex("note")),
-                                cursor.getString(cursor.getColumnIndex("tag"))));
-                    } catch(Exception e) {
-                        break;
-                    }
-        } while (cursor.moveToNext());
-        NotesAdapter notesAdapter = new NotesAdapter(notes, getFragmentManager(), getContext(), style);
+        notesAdapter = new NotesAdapter(new NoteDisplayObject().getNotes(getContext()), getFragmentManager(), getContext(), style);
+
         RecyclerView recyclerView = getView().findViewById(R.id.notesRecycler);
         SharedPreferences preferences = this.getActivity().getSharedPreferences("NotePref", Context.MODE_PRIVATE);
         if(preferences.getString("View","").equals("List")) {
@@ -95,4 +77,7 @@ public class NotesFragment extends Fragment {
             return inflater.inflate(R.layout.fragment_notes, container, false);
         }
 
+    public NotesAdapter getNotesAdapter() {
+        return notesAdapter;
+    }
 }

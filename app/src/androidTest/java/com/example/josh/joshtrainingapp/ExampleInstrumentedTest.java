@@ -56,5 +56,4 @@ public class ExampleInstrumentedTest {
                 .check(matches(withText("Espresso")));
 
     }
-
 }

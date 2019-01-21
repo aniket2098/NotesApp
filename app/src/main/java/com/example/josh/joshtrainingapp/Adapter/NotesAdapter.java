@@ -19,21 +19,26 @@ import android.view.ViewGroup;
 import android.widget.TextView;
 
 import com.example.josh.joshtrainingapp.Database.DBManager;
+import com.example.josh.joshtrainingapp.Fragment.ViewNoteFragment;
 import com.example.josh.joshtrainingapp.POJO.NoteDisplayObject;
 import com.example.josh.joshtrainingapp.R;
-import com.example.josh.joshtrainingapp.Fragment.ViewNoteFragment;
 
+import java.util.Collections;
+import java.util.Comparator;
 import java.util.List;
 
 public class NotesAdapter extends RecyclerView.Adapter<NotesAdapter.MyViewHolder> {
 
-    private List<NoteDisplayObject> notes;
-    FragmentManager fragmentManager;
+    private static List<NoteDisplayObject> notes;
+    static FragmentManager fragmentManager;
     Context context;
-    String style;
+    static String style;
 
+    public NotesAdapter() {
 
-    class MyViewHolder extends RecyclerView.ViewHolder {
+    }
+
+     class MyViewHolder extends RecyclerView.ViewHolder {
 
         TextView notes;
         TextView textViewDate;
@@ -59,6 +64,7 @@ public class NotesAdapter extends RecyclerView.Adapter<NotesAdapter.MyViewHolder
             this.fragmentManager = fragmentManager;
             this.context = context;
             this.style = style;
+
     }
 
     @NonNull
@@ -162,6 +168,20 @@ public class NotesAdapter extends RecyclerView.Adapter<NotesAdapter.MyViewHolder
 
     }
 
+    public void sortByTitle() {
+
+        Collections.sort(notes, new Comparator<NoteDisplayObject>() {
+            @Override
+            public int compare(NoteDisplayObject o1, NoteDisplayObject o2) {
+                return o1.getNote().compareTo(o2.getNote());
+            }
+        });
+        for(int i = 0;i<notes.size();i++) {
+
+            System.out.println(notes.get(i).getNote());
+        }
+        notifyDataSetChanged();
+    }
     @Override
     public int getItemCount() {
 
