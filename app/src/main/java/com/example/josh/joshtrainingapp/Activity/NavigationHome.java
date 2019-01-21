@@ -25,6 +25,7 @@ import android.view.MenuItem;
 import android.widget.Toast;
 
 import com.example.josh.joshtrainingapp.Adapter.NotesAdapter;
+import com.example.josh.joshtrainingapp.BuildConfig;
 import com.example.josh.joshtrainingapp.Fragment.NotesFragment;
 import com.example.josh.joshtrainingapp.R;
 
@@ -103,7 +104,6 @@ public class NavigationHome extends AppCompatActivity
                     != PackageManager.PERMISSION_GRANTED) {
                 // Permission is not granted
                 String[] perms = {"android.permission.WRITE_EXTERNAL_STORAGE"};
-
                 int permsRequestCode = 200;
                 requestPermissions(perms, permsRequestCode);
             }
@@ -114,12 +114,13 @@ public class NavigationHome extends AppCompatActivity
 
                 if(sd.canWrite()) {
 
-                    String currentDBPath = "//data//com.example.josh.joshtrainingapp//databases//DIARY.DB";
+                    String currentDBPath = "//data//" + BuildConfig.APPLICATION_ID + "//databases//DIARY.DB";
                     String backupDBPath = "BACKUPDIARY.DB";
                     File src = new File(data, currentDBPath);
                     File dst = new File(sd, backupDBPath);
 
                     InputStream in = new FileInputStream(src);
+
                     try {
 
                         OutputStream out = new FileOutputStream(dst);
@@ -131,11 +132,14 @@ public class NavigationHome extends AppCompatActivity
                             while ((len = in.read(buf)) > 0) {
                                 out.write(buf, 0, len);
                             }
+
                             Toast.makeText(this, "Backup Successful!", Toast.LENGTH_SHORT).show();
                         } finally {
+
                             out.close();
                         }
                     } finally {
+
                         in.close();
                     }
                 } else {
@@ -168,7 +172,7 @@ public class NavigationHome extends AppCompatActivity
                                 File data = Environment.getDataDirectory();
 
 
-                                String currentDBPath = "//data//com.example.josh.joshtrainingapp//databases//DIARY.DB";
+                                String currentDBPath = "//data//" + BuildConfig.APPLICATION_ID + "//databases//DIARY.DB";
                                 String backupDBPath = "BACKUPDIARY.DB";
                                 File dst = new File(data, currentDBPath);
                                 File src = new File(sd, backupDBPath);
